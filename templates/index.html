@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+{% include "header.html" %}
+
+{% if content == "createList" %}
+{% include "createList.html" %}
+
+{% elif content == "login"%}
+{% include "login.html" %}
+
+{% elif content == "register"%}
+{% include "register.html" %}
+
+{% elif content == "loginFirst"%}
+{% include "loginFirst.html" %}
+
+{% else %}
+{% include "mainPage.html" %}
+{%endif%}
+
+{% include "footer.html" %}
+
+</html>

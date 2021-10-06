@@ -1,0 +1,51 @@
+{% extends 'content.html' %}
+
+{% block head %}
+{% endblock %}
+
+{% block main %}
+<ul>
+    {% for i in range(5) %}
+    <li>
+        <a class="btn btn-info" href="/movie" style="margin-top: 15px;">
+            movies
+        </a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
+
+{% block script %}
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+<script src="static/js/asynchronousRequest.js"></script>
+<script>
+    window.onload = function getUserLists()
+    {
+        asyncRequest("a, b", "getEntryTypes").then(function (response)
+        {
+            if (response.status !== 200)
+            {
+                console.log(`Response status was not 200, it was: ${response.status}`);
+                return;
+            }
+            else
+            {
+                response.json().then(function (res)
+                {
+                    $('#entryType').empty();
+                    for (EntryType in res)
+                    {
+                        console.log(res[EntryType].name);
+                        var option = document.createElement("option");
+                        option.text = "Text";
+                        option.value = res[EntryType].name;
+                        var datalist = document.getElementById("entryType");
+                        datalist.appendChild(option);
+                    }
+                })
+            }
+        });
+    }
+</script>
+
+{% endblock %}
